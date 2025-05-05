@@ -41,6 +41,11 @@ export class SignUpController implements Controller {
         email: httpRequest.body.email,
         password: httpRequest.body.password,
       })
+
+      return {
+        statusCode: 200,
+        body: account,
+      }
     } catch (error) {
       return serverError()
     }
