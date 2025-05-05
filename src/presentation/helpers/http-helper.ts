@@ -1,4 +1,4 @@
-import { ServerError } from "../errors/server-error"
+import { ServerError } from "../errors"
 import type { HttpResponse } from "../protocols/http"
 
 export const badRequest = (error: Error): HttpResponse => ({
@@ -11,7 +11,7 @@ export const serverError = (): HttpResponse => ({
   body: new ServerError(),
 })
 
-export const ok = (data: any): HttpResponse => ({
+export const ok = (data: unknown): HttpResponse => ({
   statusCode: 200,
   body: data,
 })
