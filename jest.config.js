@@ -13,6 +13,7 @@ const config = {
     "!<rootDir>/src/**/*-protocols.ts",
     "!<rootDir>/src/**/protocols/**",
   ],
-};
+  preset: "@shelf/jest-mongodb",
+}
 
-module.exports = config;
+module.exports = config
