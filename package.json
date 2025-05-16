@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "prepare": "husky",
+    "start": "node dist/main/server.js",
+    "build": "rimraf dist && tsc",
+    "dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --no-coverage --runInBand",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:staged": "npm test -- --findRelatedTests",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:ci": "npm test -- --coverage",
-    "start": "sucrase-node src/main/server.ts"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +32,7 @@
     "husky": "9.1.7",
     "jest": "29.7.0",
     "lint-staged": "15.5.1",
+    "rimraf": "6.0.1",
     "sucrase": "3.35.0",
     "supertest": "7.1.0",
     "ts-jest": "29.3.2",
