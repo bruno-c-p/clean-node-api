@@ -1,6 +1,7 @@
 {
   "name": "clean-node-api",
   "version": "1.0.0",
+  "description": "Node.js Rest API using TDD, Clean Architecture and SOLID Principles",
   "main": "index.js",
   "scripts": {
     "start": "node dist/main/server.js",
@@ -17,7 +18,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "engines": {
+    "node": "22.x"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@shelf/jest-mongodb": "5.1.0",
