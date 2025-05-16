@@ -1,7 +1,6 @@
-FROM node:22
-
+FROM node:22-slim
 WORKDIR /usr/src/clean-node-api
-
-COPY ./package*.json .
-ENV HUSKY=0
-RUN npm ci
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
