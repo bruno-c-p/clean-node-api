@@ -17,6 +17,7 @@
     "test:staged": "npm test -- --findRelatedTests",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:ci": "npm test -- --coverage",
+    "lint": "biome check",
     "prepare": "husky"
   },
   "keywords": [],

@@ -6,8 +6,15 @@
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false,
-    "ignore": ["node_modules", "dist", ".vscode"]
+    "ignoreUnknown": true,
+    "ignore": [
+      "node_modules",
+      "dist",
+      ".vscode",
+      "*.json",
+      "./data",
+      "coverage"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -21,7 +28,10 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      }
     }
   },
   "javascript": {
