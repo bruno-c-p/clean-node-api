@@ -5,6 +5,9 @@ const config = {
   transform: {
     "^.+\\.ts$": "ts-jest",
   },
+  moduleNameMapper: {
+    "@/(.*)": "<rootDir>/src/$1",
+  },
   collectCoverage: true,
   coverageDirectory: "coverage",
   collectCoverageFrom: [

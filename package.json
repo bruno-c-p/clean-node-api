@@ -8,7 +8,7 @@
     "watch": "nodemon --watch src --ext ts --exec \"npm run dev\" --signal SIGTERM",
     "debug": "node --inspect=0.0.0.0:9222 --nolazy dist/main/server.js",
     "start": "node dist/main/server.js",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "up": "docker compose up --watch",
     "down": "docker compose down",
     "test": "jest --passWithNoTests --silent --noStackTrace --no-coverage --runInBand",
@@ -49,8 +49,12 @@
     "bcrypt": "5.1.1",
     "express": "5.1.0",
     "fast-glob": "3.3.3",
+    "module-alias": "2.2.3",
     "mongodb": "6.16.0",
     "nodemon": "3.1.10",
     "validator": "13.15.0"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }

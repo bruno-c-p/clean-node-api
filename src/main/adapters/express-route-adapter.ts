@@ -1,9 +1,9 @@
-import type { Request, Response } from "express"
 import type {
   Controller,
   HttpRequest,
   HttpResponse,
-} from "../../presentation/protocols"
+} from "@/presentation/protocols"
+import type { Request, Response } from "express"
 
 export const routeAdapter = (controller: Controller) => {
   return async (req: Request, res: Response) => {

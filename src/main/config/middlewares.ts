@@ -1,9 +1,9 @@
-import type { Express } from "express"
 import {
   bodyParser,
   contentTypeMiddleware,
   corsMiddleware,
-} from "../middlewares"
+} from "@/main/middlewares"
+import type { Express } from "express"
 
 export default (app: Express): void => {
   app.use(corsMiddleware)

@@ -1,11 +1,11 @@
-import type { LogErrorRepository } from "../../data/protocols/log-error-repository"
-import type { AccountModel } from "../../domain/models/account"
-import { ok, serverError } from "../../presentation/helpers"
+import type { LogErrorRepository } from "@/data/protocols/log-error-repository"
+import type { AccountModel } from "@/domain/models/account"
+import { ok, serverError } from "@/presentation/helpers"
 import type {
   Controller,
   HttpRequest,
   HttpResponse,
-} from "../../presentation/protocols"
+} from "@/presentation/protocols"
 import { LogControllerDecorator } from "./log"
 
 const makeController = () => {

@@ -1,5 +1,5 @@
-import { InvalidParamError, MissingParamError } from "../../errors"
-import { badRequest, ok, serverError } from "../../helpers"
+import { InvalidParamError, MissingParamError } from "@/presentation/errors"
+import { badRequest, ok, serverError } from "@/presentation/helpers"
 import type {
   AddAccount,
   Controller,
