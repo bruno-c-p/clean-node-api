@@ -1,5 +1,6 @@
 import { InvalidParamError, MissingParamError } from "@/presentation/errors"
 import { badRequest } from "@/presentation/helpers"
+import type { HttpRequest } from "@/presentation/protocols"
 import type { EmailValidator } from "@/presentation/protocols/email-validator"
 import { LoginController } from "./login"
 
@@ -12,6 +13,13 @@ const makeEmailValidator = (): EmailValidator => {
 
   return new EmailValidatorStub()
 }
+
+const makeFakeRequest = (): HttpRequest => ({
+  body: {
+    email: "any_email",
+    password: "any_password",
+  },
+})
 
 type SutTypes = {
   sut: LoginController
@@ -54,26 +62,14 @@ describe("Login Controller", () => {
   it("should call EmailValidator with correct email", async () => {
     const { sut, emailValidatorStub } = makeSut()
     const isValidSpy = jest.spyOn(emailValidatorStub, "isValid")
-    const httpRequest = {
-      body: {
-        email: "any_email",
-        password: "any_password",
-      },
-    }
-    await sut.handle(httpRequest)
+    await sut.handle(makeFakeRequest())
     expect(isValidSpy).toHaveBeenCalledWith("any_email")
   })
 
   it("should return 400 if email is invalid", async () => {
     const { sut, emailValidatorStub } = makeSut()
-    const httpRequest = {
-      body: {
-        email: "any_email",
-        password: "any_password",
-      },
-    }
     jest.spyOn(emailValidatorStub, "isValid").mockReturnValueOnce(false)
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new InvalidParamError("email")))
   })
 })
