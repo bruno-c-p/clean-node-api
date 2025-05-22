@@ -1,5 +1,10 @@
 import { InvalidParamError, MissingParamError } from "@/presentation/errors"
-import { badRequest, serverError, unauthorized } from "@/presentation/helpers"
+import {
+  badRequest,
+  ok,
+  serverError,
+  unauthorized,
+} from "@/presentation/helpers"
 import { LoginController } from "./login"
 import type {
   Authentication,
@@ -121,5 +126,15 @@ describe("Login Controller", () => {
       .mockReturnValueOnce(new Promise((_, reject) => reject(new Error())))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  it("should return 200 if valid credentials are provided", async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(
+      ok({
+        accessToken: "any_token",
+      })
+    )
   })
 })
