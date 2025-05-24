@@ -1,7 +1,9 @@
 import { CompareFieldsValidator } from "@/presentation/helpers/validators/compare-fields-validator"
+import { EmailValidator } from "@/presentation/helpers/validators/email-validator"
 import { RequiredFieldValidator } from "@/presentation/helpers/validators/required-field-validator"
 import type { Validator } from "@/presentation/helpers/validators/validator"
 import { ValidatorComposite } from "@/presentation/helpers/validators/validator-composite"
+import { EmailValidatorAdapter } from "@/utils/email-validator-adapter"
 
 export const makeSignUpValidator = (): ValidatorComposite => {
   const validators: Validator[] = []
@@ -13,6 +15,8 @@ export const makeSignUpValidator = (): ValidatorComposite => {
   validators.push(
     new CompareFieldsValidator("password", "passwordConfirmation")
   )
+
+  validators.push(new EmailValidator("email", new EmailValidatorAdapter()))
 
   return new ValidatorComposite(validators)
 }
