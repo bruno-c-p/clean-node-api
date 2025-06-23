@@ -6,7 +6,12 @@ import {
   unauthorized,
 } from "@/presentation/helpers"
 import { LoginController } from "./login"
-import type { Authentication, HttpRequest, Validator } from "./login-protocols"
+import type {
+  Authentication,
+  AuthenticationModel,
+  HttpRequest,
+  Validator,
+} from "./login-protocols"
 
 const makeValidator = (): Validator => {
   class ValidatorStub implements Validator {
@@ -20,7 +25,7 @@ const makeValidator = (): Validator => {
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth(email: string, password: string): Promise<string> {
+    async auth(authentication: AuthenticationModel): Promise<string> {
       return new Promise(resolve => resolve("any_token"))
     }
   }
@@ -58,7 +63,10 @@ describe("Login Controller", () => {
     const { sut, authenticationStub } = makeSut()
     const authSpy = jest.spyOn(authenticationStub, "auth")
     await sut.handle(makeFakeRequest())
-    expect(authSpy).toHaveBeenCalledWith("any_email", "any_password")
+    expect(authSpy).toHaveBeenCalledWith({
+      email: "any_email",
+      password: "any_password",
+    })
   })
 
   it("should return 401 if invalid credentials are provided", async () => {
