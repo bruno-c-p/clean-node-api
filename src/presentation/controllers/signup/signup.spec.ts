@@ -1,15 +1,10 @@
-import {
-  InvalidParamError,
-  MissingParamError,
-  ServerError,
-} from "@/presentation/errors"
+import { MissingParamError, ServerError } from "@/presentation/errors"
 import { badRequest, ok, serverError } from "@/presentation/helpers"
 import { SignUpController } from "./signup"
 import type {
   AccountModel,
   AddAccount,
   AddAccountModel,
-  EmailValidator,
   HttpRequest,
   Validator,
 } from "./signup-protocols"

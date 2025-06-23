@@ -1,9 +1,9 @@
 import { InvalidParamError } from "@/presentation/errors"
-import type { EmailValidator as IEmailValidator } from "../../controllers/signup/signup-protocols"
-import { EmailValidator } from "./email-validator"
+import type { EmailValidator } from "@/presentation/protocols/email-validator"
+import { EmailValidator as EmailValidatorImpl } from "./email-validator"
 
-const makeEmailValidator = (): IEmailValidator => {
-  class EmailValidatorStub implements IEmailValidator {
+const makeEmailValidator = (): EmailValidator => {
+  class EmailValidatorStub implements EmailValidator {
     isValid(email: string): boolean {
       return true
     }
@@ -12,13 +12,13 @@ const makeEmailValidator = (): IEmailValidator => {
 }
 
 type SutTypes = {
-  sut: EmailValidator
-  emailValidatorStub: IEmailValidator
+  sut: EmailValidatorImpl
+  emailValidatorStub: EmailValidator
 }
 
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator()
-  const sut = new EmailValidator("email", emailValidatorStub)
+  const sut = new EmailValidatorImpl("email", emailValidatorStub)
   return { sut, emailValidatorStub }
 }
 
