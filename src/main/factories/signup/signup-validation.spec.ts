@@ -1,8 +1,12 @@
-import { EmailValidator } from "@/presentation/helpers/validators/email-validator"
-import { RequiredFieldValidator } from "@/presentation/helpers/validators/required-field-validator"
-import { ValidatorComposite } from "@/presentation/helpers/validators/validator-composite"
-import type { EmailValidator as IEmailValidator } from "@/presentation/protocols/email-validator"
-import type { Validator } from "@/presentation/protocols/validator"
+import {
+  EmailValidator,
+  RequiredFieldValidator,
+  ValidatorComposite,
+} from "@/presentation/helpers"
+import type {
+  EmailValidator as IEmailValidator,
+  Validator,
+} from "@/presentation/protocols"
 import { makeLoginValidator } from "../login/login-validation"
 
 jest.mock("@/presentation/helpers/validators/validator-composite")

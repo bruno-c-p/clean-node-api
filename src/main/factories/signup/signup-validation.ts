@@ -3,8 +3,8 @@ import {
   EmailValidator,
   RequiredFieldValidator,
   ValidatorComposite,
-} from "@/presentation/helpers/validators"
-import type { Validator } from "@/presentation/protocols/validator"
+} from "@/presentation/helpers"
+import type { Validator } from "@/presentation/protocols"
 import { EmailValidatorAdapter } from "@/utils/email-validator-adapter"
 
 export const makeSignUpValidator = (): ValidatorComposite => {
