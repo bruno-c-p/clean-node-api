@@ -18,6 +18,7 @@
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:ci": "npm test -- --coverage",
     "lint": "biome check",
+    "check": "npm-check -s -u",
     "prepare": "husky"
   },
   "keywords": [],
