@@ -2,9 +2,9 @@ import { DbAuthentication } from "./db-authentication"
 import type {
   AccountModel,
   AuthenticationModel,
+  Encrypter,
   HashComparer,
   LoadAccountByEmailRepository,
-  TokenGenerator,
   UpdateAccessTokenRepository,
 } from "./db-authentication-protocols"
 
@@ -41,13 +41,13 @@ const makeHashComparerStub = (): HashComparer => {
   return new HashComparerStub()
 }
 
-const makeTokenGeneratorStub = (): TokenGenerator => {
-  class TokenGeneratorStub implements TokenGenerator {
-    async generate(id: string): Promise<string> {
+const makeEncrypterStub = (): Encrypter => {
+  class EncrypterStub implements Encrypter {
+    async encrypt(id: string): Promise<string> {
       return new Promise(resolve => resolve("any_token"))
     }
   }
-  return new TokenGeneratorStub()
+  return new EncrypterStub()
 }
 
 const makeUpdateAccessTokenRepositoryStub = (): UpdateAccessTokenRepository => {
@@ -63,7 +63,7 @@ type SutTypes = {
   sut: DbAuthentication
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
   hashComparerStub: HashComparer
-  tokenGeneratorStub: TokenGenerator
+  encrypterStub: Encrypter
   updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
 }
 
@@ -71,19 +71,19 @@ const makeSut = (): SutTypes => {
   const loadAccountByEmailRepositoryStub =
     makeLoadAccountByEmailRepositoryStub()
   const hashComparerStub = makeHashComparerStub()
-  const tokenGeneratorStub = makeTokenGeneratorStub()
+  const encrypterStub = makeEncrypterStub()
   const updateAccessTokenRepositoryStub = makeUpdateAccessTokenRepositoryStub()
   const sut = new DbAuthentication(
     loadAccountByEmailRepositoryStub,
     hashComparerStub,
-    tokenGeneratorStub,
+    encrypterStub,
     updateAccessTokenRepositoryStub
   )
   return {
     sut,
     loadAccountByEmailRepositoryStub,
     hashComparerStub,
-    tokenGeneratorStub,
+    encrypterStub,
     updateAccessTokenRepositoryStub,
   }
 }
@@ -146,16 +146,16 @@ describe("DbAuthentication UseCase", () => {
     expect(accessToken).toBeNull()
   })
 
-  it("should call TokenGenerator with correct id", async () => {
-    const { sut, tokenGeneratorStub } = makeSut()
-    const tokenGeneratorSpy = jest.spyOn(tokenGeneratorStub, "generate")
+  it("should call Encrypter with correct id", async () => {
+    const { sut, encrypterStub } = makeSut()
+    const encrypterSpy = jest.spyOn(encrypterStub, "encrypt")
     await sut.auth(makeFakeAuthentication())
-    expect(tokenGeneratorSpy).toHaveBeenCalledWith("any_id")
+    expect(encrypterSpy).toHaveBeenCalledWith("any_id")
   })
 
-  it("should throw if TokenGenerator throws", async () => {
-    const { sut, tokenGeneratorStub } = makeSut()
-    jest.spyOn(tokenGeneratorStub, "generate").mockImplementationOnce(() => {
+  it("should throw if Encrypter throws", async () => {
+    const { sut, encrypterStub } = makeSut()
+    jest.spyOn(encrypterStub, "encrypt").mockImplementationOnce(() => {
       throw new Error()
     })
     await expect(sut.auth(makeFakeAuthentication())).rejects.toThrow(
