@@ -7,7 +7,7 @@ import type {
   EmailValidator as IEmailValidator,
   Validator,
 } from "@/presentation/protocols"
-import { makeLoginValidator } from "./login-validation"
+import { makeLoginValidator } from "../login/login-validation-factory"
 
 jest.mock("@/presentation/helpers/validators/validator-composite")
 

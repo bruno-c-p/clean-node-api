@@ -5,13 +5,13 @@ import {
   serverError,
   unauthorized,
 } from "@/presentation/helpers"
-import { LoginController } from "./login"
+import { LoginController } from "./login-controller"
 import type {
   Authentication,
   AuthenticationModel,
   HttpRequest,
   Validator,
-} from "./login-protocols"
+} from "./login-controller-protocols"
 
 const makeValidator = (): Validator => {
   class ValidatorStub implements Validator {

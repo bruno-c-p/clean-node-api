@@ -5,7 +5,7 @@ import type {
   HttpRequest,
   HttpResponse,
   Validator,
-} from "./signup-protocols"
+} from "./signup-controller-protocols"
 
 export class SignUpController implements Controller {
   constructor(
